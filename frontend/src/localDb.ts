@@ -9,51 +9,84 @@ export interface User {
   firstConnexion: boolean;
 }
 
+const API_BASE_URL = "http://localhost:3000";
 const USERS_KEY = "users";
 const CURRENT_USER_KEY = "currentUserEmail";
 
-// Enregistre un nouvel utilisateur dans la "base"
-export function saveUser(user: User): void {
-  const users: User[] = getAllUsers();
-  users.push(user);
-  localStorage.setItem(USERS_KEY, JSON.stringify(users));
+export async function saveUser(user: User): Promise<void> {
+  const response = await fetch(`${API_BASE_URL}/register`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(user),
+  });
+  if (!response.ok) {
+    throw new Error(`Failed to register user: ${await response.text()}`);
+  }
 }
 
-// Récupère tous les utilisateurs
-export function getAllUsers(): User[] {
-  return JSON.parse(localStorage.getItem(USERS_KEY) || "[]");
+// Fetches all users from the backend
+export async function getAllUsers(): Promise<User[]> {
+  const response = await fetch(`${API_BASE_URL}/users`, {
+    method: "GET",
+  });
+  if (!response.ok) {
+    throw new Error(`Failed to fetch users: ${await response.text()}`);
+  }
+  return response.json();
 }
 
-// Récupère un utilisateur par email
-export function getUserByEmail(email: string): User | undefined {
-  return getAllUsers().find(user => user.email === email);
+// Fetches a single user by email from the backend
+export async function getUserByEmail(email: string): Promise<User | undefined> {
+  const response = await fetch(`${API_BASE_URL}/users/${email}`, {
+    method: "GET",
+  });
+  if (!response.ok) {
+    if (response.status === 404) {
+      return undefined; // User not found
+    }
+    throw new Error(`Failed to fetch user: ${await response.text()}`);
+  }
+  return response.json();
 }
 
-// Met à jour les données d'un utilisateur
-export function updateUser(updatedUser: User): void {
-  const users = getAllUsers().map(user =>
-    user.email === updatedUser.email ? updatedUser : user
-  );
-  localStorage.setItem(USERS_KEY, JSON.stringify(users));
+// Updates user data by sending a PUT request to the backend
+export async function updateUser(updatedUser: User): Promise<void> {
+  const response = await fetch(`${API_BASE_URL}/users/${updatedUser.email}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(updatedUser),
+  });
+  if (!response.ok) {
+    throw new Error(`Failed to update user: ${await response.text()}`);
+  }
 }
 
-// Supprime un utilisateur
-export function deleteUserByEmail(email: string): void {
-  const users = getAllUsers().filter(user => user.email !== email);
-  localStorage.setItem(USERS_KEY, JSON.stringify(users));
+// Deletes a user by sending a DELETE request to the backend
+export async function deleteUserByEmail(email: string): Promise<void> {
+  const response = await fetch(`${API_BASE_URL}/users/${email}`, {
+    method: "DELETE",
+  });
+  if (!response.ok) {
+    throw new Error(`Failed to delete user: ${await response.text()}`);
+  }
 }
 
-// Définit l'utilisateur actuellement connecté
+// Sets the current user by saving their email to localStorage (optional)
 export function setCurrentUser(email: string): void {
-  localStorage.setItem(CURRENT_USER_KEY, email);
+  localStorage.setItem("currentUserEmail", email);
 }
 
-// Récupère l'utilisateur actuellement connecté
-export function getCurrentUser(): User | null {
-  const email = localStorage.getItem(CURRENT_USER_KEY);
-  return email ? getUserByEmail(email) || null : null;
+// Fetches the current user by retrieving their email from localStorage and then calling the backend
+export async function getCurrentUser(): Promise<User | null> {
+  const email = localStorage.getItem("currentUserEmail");
+  if (!email) {
+    return null;
+  }
+  const user = await getUserByEmail(email);
+  return user || null;
 }
 
+// Clears the current user's email from localStorage
 export function clearCurrentUser(): void {
-  localStorage.removeItem(CURRENT_USER_KEY);
+  localStorage.removeItem("currentUserEmail");
 }

@@ -1,4 +1,5 @@
-import sequelize from "../config/database-config.js";
+import sequelize from '../config/database-config.js';
+
 import {DataTypes, Model} from 'sequelize';
 
 class GamePlayer extends Model {}

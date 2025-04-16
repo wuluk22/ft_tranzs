@@ -55,3 +55,9 @@ re:
 ps:
 	@echo "Listing container status in $(ENV) mode"
 	@docker-compose -f $(CONFIG_FILE) ps
+
+devprod:
+	@echo "Starting frontend in development mode and backend in production mode..."
+	@docker-compose -f ./docker-config/docker-compose-dev.yml up -d frontend-dev
+	@docker-compose -f ./docker-config/docker-compose-prod.yml up -d backend
+	@echo "Frontend (dev) and Backend (prod) are running."

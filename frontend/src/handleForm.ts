@@ -13,7 +13,7 @@ export function setupRegisterListeners(): void{
     const passwordInput = document.getElementById("password") as HTMLInputElement;
     const validation2FA = document.getElementById("validation2FA") as HTMLInputElement;
 
-    signInForm.addEventListener("submit", (e) => {
+    signInForm.addEventListener("submit", async (e) => {
         e.preventDefault();
 
         const username = usernameInput.value.trim();
@@ -29,7 +29,7 @@ export function setupRegisterListeners(): void{
 			validation2FA: validation,
             firstConnexion: true,
         };
-        const foundUser = getUserByEmail(email);
+        const foundUser = await getUserByEmail(email);
         if (foundUser !== undefined) {
             emailInput.classList.add("border-red-500");
             emailInput.value = "";
@@ -54,7 +54,7 @@ export function setupRegisterListeners(): void{
                     passwordInput.focus();
                 }
             } else {
-                saveUser(User);
+                await saveUser(User);
                 if (validation === true) {
                     history.replaceState({}, "", "/login/2FA");
                     loadView("/login/2FA");
@@ -100,19 +100,19 @@ export function setupLoginListeners(): void{
     emailInput.addEventListener("click", () => removeErrorStyleLogIn(emailInput, "border-red-500"));
     passwordInput.addEventListener("click", () => removeErrorStyleLogIn(passwordInput, "border-red-500"));
 	
-    loginForm.addEventListener("submit", (e) => {
+    loginForm.addEventListener("submit", async (e) => {
         e.preventDefault();
 
         const email = emailInput.value.trim();
         const password = passwordInput.value;
 
-        const foundUser = getUserByEmail(email);
+        const foundUser = await getUserByEmail(email);
         if (foundUser?.email === email && foundUser?.password === password) {
             history.replaceState({}, "", "/");
             loadView("/");
             renderUserWidget(foundUser);
             if (foundUser.firstConnexion === true) {
-                displaySettingsFirstConnexion(foundUser);
+                await displaySettingsFirstConnexion(foundUser);
                 foundUser.firstConnexion = false;
             }
             setCurrentUser(email);

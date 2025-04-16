@@ -1,5 +1,4 @@
-import sequelize from "../config/database-config.js";
-
+import sequelize from '../config/database-config.js';
 import Chat from './Chat.js'
 import ChatParticipant from './ChatParticipant.js'
 import Game from './Game.js';

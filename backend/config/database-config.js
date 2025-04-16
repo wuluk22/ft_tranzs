@@ -19,7 +19,8 @@ if (PROGRAM_MODE !== 'development') {
 const sequelize = new Sequelize({
     dialect: 'sqlite',
     storage: storageType,
-    logging: false
+    logging: false,
+    define: {freezeTableName: true}
 });
 
 export default sequelize;

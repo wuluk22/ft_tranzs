@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "@mapbox/node-pre-gyp": "^2.0.0",
+    "fluent-json-schema": "^6.0.0",
+    "string-width": "^7.2.0"
+  }
+}

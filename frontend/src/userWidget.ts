@@ -31,21 +31,21 @@ export async function displaySettingsFirstConnexion(user: User) {
     console.error("settingsFirstConnexionForm not found");
     return;
   }
-  settingsFirstConnexionForm.addEventListener("submit", (e) => {
+  settingsFirstConnexionForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     const username = usernameInput.value.trim();
     if (username !== "") user.userName = username;
     if (avatarInput.files && avatarInput.files[0]) {
       const reader = new FileReader();
-      reader.onload = () => {
+      reader.onload = async () => {
         user.avatar = reader.result as string;
-        updateUser(user);
+        await updateUser(user);
         resetContainerAndRenderUserWidget(container, user);
       };
       reader.readAsDataURL(avatarInput.files[0]);
     } else {
-      updateUser(user);
+      await updateUser(user);
       resetContainerAndRenderUserWidget(container, user);
     }
   });
@@ -142,7 +142,7 @@ export async function setupSettingsForm() {
   }
   const clone = template.content.cloneNode(true) as HTMLElement;
   
-  const currentUser = getCurrentUser();
+  const currentUser = await getCurrentUser();
   if (!currentUser) return;
   const userName = currentUser.userName ? currentUser.userName : currentUser.email;
   try { 
@@ -166,7 +166,7 @@ export async function setupSettingsForm() {
   const usernameInput = document.getElementById("username") as HTMLInputElement;
   const avatarInput = document.getElementById("avatar") as HTMLInputElement;
 
-  settingsForm!.addEventListener("submit", (e) => {
+  settingsForm!.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     const enteredEmail = emailInput.value.trim();
@@ -183,7 +183,7 @@ export async function setupSettingsForm() {
     currentUser.userName = usernameInput.value.trim();
     if (avatarInput.files && avatarInput.files[0]) {
       const reader = new FileReader();
-      reader.onload = () => {
+      reader.onload = async () => {
         currentUser.avatar = reader.result as string;
         updateUser(currentUser);
         resetContainerAndRenderUserWidget(container, currentUser);
@@ -202,11 +202,11 @@ export async function setupSettingsForm() {
   });
 }
 
-export function resetContainerAndRenderUserWidget(container: HTMLElement, user: User) {
+export async function resetContainerAndRenderUserWidget(container: HTMLElement, user: User) {
   if (container)
     container.innerHTML = "";
   history.replaceState({}, "", "/");
   loadView("/");
-  renderUserWidget(user!);
+  await renderUserWidget(user!);
   updateUIBasedOnAuth();
 }

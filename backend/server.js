@@ -6,6 +6,7 @@ const HOST = process.env.HOST || '0.0.0.0';
 const start = async () => {
     try {
         const app = await buildApp();
+        console.log(app.printRoutes());
         await app.listen({port: PORT, host: HOST});
     } catch (error) {
         console.log(error);
