@@ -1,0 +1,31 @@
+name: transcendence
+services:
+  frontend:
+    container_name: frontend
+    build:
+      context: ../frontend
+      args:
+        MODE: production
+    volumes:
+      - frontend_build:/app/build
+    env_file:
+      - .env
+    depends_on:
+      - backend
+
+  backend:
+    container_name: backend
+    build:
+      context: ../backend
+      args:
+        MODE: production
+    ports:
+      - "3000:3000"
+    volumes:
+      - frontend_build:/app/public
+    env_file:
+      - .env
+    restart: always
+
+volumes:
+  frontend_build:

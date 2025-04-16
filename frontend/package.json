@@ -1,0 +1,19 @@
+{
+  "scripts": {
+	"dev": "vite --host --config /app/config/vite.config.ts",
+    "build": "npm run build:ts && npm run build:css",
+    "build:ts": "tsc",
+    "build:css": "postcss src/styles.css -o dist/styles.css"
+  },
+  "devDependencies": {
+	"vite": "^5.0.0",
+    "autoprefixer": "^10.4.0",
+    "postcss": "^8.5.3",
+    "postcss-cli": "^11.0.1",
+    "tailwindcss": "^3.3.0",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "babylonjs": "^6.32.0"
+  }
+}

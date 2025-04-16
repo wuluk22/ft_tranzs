@@ -1,0 +1,64 @@
+<form
+  id="signInForm"
+  class="fixed inset-0 flex items-center justify-center backdrop-blur-xl"
+>
+  <div class="bg-purple-50 p-6 window shadow-brutal w-96">
+    <h1 class="text-3xl">Register</h1>
+    <p class="mb-6 text-sm"> Please, enter your details</p>
+    <div class="mb-2">
+      <label class="block text-sm font-medium text-black mb-1">Username</label>
+      <input
+        required
+        type="text"
+        id="username"
+        class="w-full border border-black rounded p-2 mb-2"
+      />
+    </div>
+    <div class="mb-2">
+      <label class="block text-sm font-medium text-black mb-1">Email</label>
+      <input
+        required
+        type="email"
+        id="email"
+        class="w-full border border-black rounded p-2 mb-2"
+      />
+    </div>
+    <div class="mb-2">
+      <label class="block text-sm font-medium text-black mb-1">Password</label>
+      <input
+        required
+        type="password"
+        id="password"
+        minlength="8"
+        pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).+$"
+        class="w-full border border-black rounded p-2 mb-2"
+      />
+    </div>
+    <div class="mb-2">
+      <input
+      type="checkbox"
+      id="validation2FA"
+      class="form-checkbox border-black rounded p-2"
+      />
+      <label for="validation2FA" class="inline-flex items-center gap-4 text-sm font-medium text-gray-700">Validation with 2FA</label>
+    </div>
+    <div class="flex justify-between mt-4">
+      <button type="submit" class="btn-orange">
+        Submit
+      </button>
+      <button
+        type="button"
+        id="closeForm"
+        class="btn-pink"
+      >
+        Close
+      </button>
+    </div>
+	<div class="flex items-center text-xs gap-3 mt-4">
+		<p class="text-gray-700">Already have an account ? </p>
+		<button type="button" data-route="/login" class="little-btn bg-lime-200  hover:bg-lime-300 focus:bg-lime-300">
+			click here to login
+		</button>
+	</div>
+  </div>
+</form>

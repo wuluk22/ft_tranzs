@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body
+{
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+   
+}
+
+#renderCanvas{
+    
+    width: 100%;
+    height: 100%;
+    background-color: #3498db;
+}
+
+@layer utilities {
+  .transition-max-height {
+    transition: max-height 0.3s ease-in-out;
+  }
+  /* .text-shadow {
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
+  } */
+  .btn-pink {
+    @apply py-2.5 px-5 relative gap-x-2 rounded-sm text-sm tracking-[.00714em] font-medium border-2 border-black hover:shadow-[3px_3px_0_0_#000000] focus:shadow-[3px_3px_0_0_#000000] bg-pink-200  hover:bg-pink-300 focus:bg-pink-300 text-black;
+  }
+  .btn-green {
+    @apply py-2.5 px-5 relative gap-x-2 rounded-sm text-sm tracking-[.00714em] font-medium border-2 border-black hover:shadow-[3px_3px_0_0_#000000] focus:shadow-[3px_3px_0_0_#000000] bg-lime-200  hover:bg-lime-300 focus:bg-lime-300 text-black;
+  }
+  .btn-rose {
+    @apply py-2.5 px-5 relative gap-x-2 rounded-sm text-sm tracking-[.00714em] font-medium border-2 border-black hover:shadow-[3px_3px_0_0_#000000] focus:shadow-[3px_3px_0_0_#000000] bg-rose-200  hover:bg-rose-300 focus:bg-rose-300 text-black;
+  }
+  .btn-orange {
+    @apply py-2.5 px-5 relative gap-x-2 rounded-sm text-sm tracking-[.00714em] font-medium border-2 border-black hover:shadow-[3px_3px_0_0_#000000] focus:shadow-[3px_3px_0_0_#000000] bg-orange-200  hover:bg-orange-300 focus:bg-orange-300 text-black;
+  }
+  .little-btn {
+    @apply py-1 px-2 relative gap-x-2 rounded-sm text-xs tracking-[.00714em] font-normal border-2 border-black hover:shadow-[1px_1px_0_0_#000000] focus:shadow-[1px_1px_0_0_#000000] text-black;
+  }
+  .avatar16 {
+    @apply inline-block w-16 h-16 border border-black rounded-full
+  }
+  .avatar12 {
+    @apply inline-block w-12 h-12 border border-black rounded-full
+  }
+  .window {
+    @apply border border-black p-10;
+  }
+};

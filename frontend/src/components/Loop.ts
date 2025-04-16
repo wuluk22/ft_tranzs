@@ -1,0 +1,1 @@
+declare const BABYLON: any; // Ensure Babylon.js is recognized

@@ -1,0 +1,29 @@
+name: transcendence
+services:
+  frontend-dev:
+    build:
+      context: ../frontend
+      args:
+        MODE: development
+    container_name: frontend-dev
+    stdin_open: true
+    tty: true
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      - "5173:5173"
+    volumes:
+      - ../frontend:/app
+      - /app/node_modules  # ignore local node_modules local to avoid conflicts with those in the container...
+
+  backend-dev:
+    container_name: backend-dev
+    build:
+      context: ../backend
+      args:
+        MODE: development
+    ports:
+      - "3001:3001"
+    volumes:
+      - ../backend:/app
+      - /app/node_modules

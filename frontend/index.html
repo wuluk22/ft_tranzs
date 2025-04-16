@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html class="h-full bg-sky-400">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="./src/main.ts" type="module"></script>
+    <link href="./src/styles.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"/>
+    <script type="module" src="./src/handleRoutes.ts"></script>
+    <script type="module" src="./src/handleForm.ts"></script>
+    <title>transcendence</title>
+  </head>
+  <body class="h-full">
+    <main class="relative h-screen flex flex-col">
+      <header class="w-full"></header>
+      <div class="flex flex-1 flex-col justify-center items-center">
+        <div class="flex flex-col items-center gap-2">
+          <button
+            type="button"
+            data-route="/register"
+            id="signInBtn"
+            class="btn-pink"
+          >
+            Register
+          </button>
+          <button
+            type="button"
+            data-route="/login"
+            id="logInBtn"
+            class="btn-green"
+          >
+            Login
+          </button>
+          <button
+            type="button"
+            data-route="/game"
+            id="gameBtn"
+            class="btn-orange hidden"
+          >
+            PING-PONG GAME
+          </button>
+        </div>
+      </div>
+      <footer></footer>
+      <div id="userWidgetContainer" class="absolute top-7 right-6"></div>
+      <div id="FormContainer"></div>
+      <div id="settingsContainer"></div>
+      <div
+        id="navBarPong"
+        class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-orange rounded-lg shadow-lg overflow-hidden w-[50vw] h-[50vh] hidden z-20 max-w-[800px] max-h-[600px]"
+      >
+        <div
+          class="flex items-center justify-between bg-white px-1 py-1 border-b border-black"
+        >
+          <button
+            id="closePong"
+            class="text-red-600 font-bold text-xs hover:text-red-800"
+          >
+            ✕
+          </button>
+        </div>
+        <div
+          id="app"
+          class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10"
+        ></div>
+      </div>
+    </main>
+  </body>
+</html>

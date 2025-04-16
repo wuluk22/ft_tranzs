@@ -1,0 +1,62 @@
+<template id="userWidgetMenu">
+  <div id="userWidget" class="relative">
+    <button type="button" class="[&.show_.bi-chevron-down]:-rotate-180">
+      <img src="" alt="avatar" class="avatar avatar12 border-black hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[4px_4px_0_0_#000000] focus:-translate-x-0.5 focus:-translate-y-0.5 focus:shadow-[4px_4px_0_0_#000000]"/>
+      <span class="pointer-events-none inline-block transform duration-300 ms-auto bi bi-chevron-down"></span>
+    </button>
+
+    <ul id="dropDownMenu" class="[&.show]:!opacity-100 [&.show]:!visible opacity-0 invisible absolute top-[3.1rem] z-30 min-w-[120px] transition duration-400 ease-in-out end-0 rounded-lg bg-white border border-black shadow-[4px_4px_0_0_#000000] py-2 pl-3 p-2">
+      <li class="relative">
+        <div class="flex justify-left items-center gap-3 hover:text-white hover:bg-black">
+          <i class="bi bi-person-fill"></i>
+          <button
+            type="button"
+            data-route="/profile"
+            id="profileBtn"
+            class="gap-2 py-2"
+          >
+          Profile
+          </button>
+        </div>
+      </li>
+      <li class="relative">
+        <div class="flex justify-left items-center gap-3 hover:text-white hover:bg-black">
+          <i class="bi bi-gear-fill"></i>
+          <button
+            type="button"
+            data-route="/settings"
+            id="settingsBtn"
+            class="gap-2 py-2"
+          >
+          Settings
+          </button>
+        </div>
+      </li>
+      <li class="relative">
+        <div class="flex justify-left items-center gap-3 hover:text-white hover:bg-black">
+          <i class="bi bi-question-square-fill"></i>
+          <button
+            type="button"
+            data-route="/scores"
+            id="scoresBtn"
+            class="gap-2 py-2"
+          >
+          Scores
+          </button>
+        </div>
+      </li>
+      <li class="relative">
+        <div class="flex justify-left items-center gap-3 hover:text-white hover:bg-black">
+          <i class="bi bi-box-arrow-right"></i>
+          <button
+            type="button"
+            id="logoutBtn"
+            class="gap-2 py-2"
+          >
+          Logout
+          </button>
+        </div>
+      </li>
+    </ul>
+  </div>
+</template>
